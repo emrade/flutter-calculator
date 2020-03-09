@@ -6,8 +6,6 @@ class AppConstants {
 
 class AppFonts {
   static const primaryFont = "Poppins";
-  static const secondaryFont = "Avenir";
-  static const alternativeFont = "Questrial";
 }
 
 class AppFunctions {

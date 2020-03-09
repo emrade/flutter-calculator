@@ -1,5 +1,6 @@
 import 'package:calculator/utils/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CustomSwitch extends StatefulWidget {
   final bool value;
@@ -13,27 +14,47 @@ class CustomSwitch extends StatefulWidget {
 
 class _CustomSwitchState extends State<CustomSwitch>
     with SingleTickerProviderStateMixin {
-  Animation _circleAnimation;
   AnimationController _animationController;
 
   @override
   void initState() {
     super.initState();
-    _animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 60));
-    _circleAnimation = AlignmentTween(
-      begin: widget.value ? Alignment.centerRight : Alignment.centerLeft,
-      end: widget.value ? Alignment.centerLeft : Alignment.centerRight,
-    ).animate(
-      CurvedAnimation(
-        parent: _animationController,
-        curve: Curves.linear,
-      ),
+    _animationController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 60),
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    final leftIcon = Positioned(
+      child: Opacity(
+        child: Icon(
+          Icons.wb_sunny,
+          size: 20.0,
+          color: CustomColors.switcherDarkColor,
+        ),
+        opacity: widget.value ? 1 : 0,
+      ),
+      left: 4.0,
+      bottom: 2.0,
+      top: 2.0,
+    );
+
+    final rightIcon = Positioned(
+      child: Opacity(
+        child: Icon(
+          FontAwesomeIcons.solidMoon,
+          size: 18.0,
+          color: CustomColors.switcherLightColor,
+        ),
+        opacity: widget.value ? 0 : 1,
+      ),
+      right: 4.0,
+      bottom: 2.0,
+      top: 2.0,
+    );
+
     return AnimatedBuilder(
       animation: _animationController,
       builder: (context, child) {
@@ -48,33 +69,40 @@ class _CustomSwitchState extends State<CustomSwitch>
                 ? widget.onChanged(true)
                 : widget.onChanged(false);
           },
-          child: Container(
-            width: 50.0,
-            height: 28.0,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(24.0),
-              color: !widget.value
-                  ? Colors.black
-                  : CustomColors.switcherLightColor,
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(3.0),
-              child: AnimatedContainer(
-                alignment:
-                    widget.value ? Alignment.centerRight : Alignment.centerLeft,
-                child: Container(
-                  width: 20.0,
-                  height: 20.0,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: widget.value
-                        ? CustomColors.switcherDarkColor
-                        : CustomColors.switcherLightColor,
+          child: Stack(
+            children: <Widget>[
+              Container(
+                width: 58.0,
+                height: 32.0,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(24.0),
+                  color: !widget.value
+                      ? Colors.black
+                      : CustomColors.switcherLightColor,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(3.0),
+                  child: AnimatedContainer(
+                    alignment: widget.value
+                        ? Alignment.centerRight
+                        : Alignment.centerLeft,
+                    child: Container(
+                      width: 24.0,
+                      height: 24.0,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: widget.value
+                            ? CustomColors.switcherDarkColor
+                            : CustomColors.switcherLightColor,
+                      ),
+                    ),
+                    duration: Duration(milliseconds: 150),
                   ),
                 ),
-                duration: Duration(milliseconds: 150),
               ),
-            ),
+              leftIcon,
+              rightIcon
+            ],
           ),
         );
       },

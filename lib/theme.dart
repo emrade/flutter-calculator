@@ -18,13 +18,15 @@ ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
     primarySwatch: Colors.indigo,
     accentColor: Colors.pink,
-    scaffoldBackgroundColor: Color(0xFFFEFDF9));
+    scaffoldBackgroundColor: Color(0xFFFEFDF9),
+    fontFamily: AppFonts.primaryFont);
 
 ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
   primarySwatch: Colors.indigo,
   accentColor: Colors.pink,
-  // scaffoldBackgroundColor: Color(0xFF555A60)
+  scaffoldBackgroundColor: Color(0xFF555A60),
+  fontFamily: AppFonts.primaryFont,
 );
 
 class ThemeChanger with ChangeNotifier {

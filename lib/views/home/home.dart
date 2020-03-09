@@ -1,4 +1,5 @@
 import 'package:calculator/global_widgets/custom_switch.dart';
+import 'package:calculator/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,17 +17,31 @@ class HomePage extends StatelessWidget {
       },
     );
 
-    // final switcher = SwitchListTile(
-    //   value: theme.isDarkTheme,
-    //   onChanged: (value) {
-    //     theme.toggleTheme();
-    //   },
-    // );
+    final historyBtn = GestureDetector(
+      onTap: () {},
+      child: Text(
+        "History",
+        style: TextStyle(
+          fontSize: 18.0,
+          color: theme.isDarkTheme ? CustomColors.primaryColor : CustomColors.primaryDarkColor
+        ),
+      ),
+    );
+
+    final controls = Container(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          switcher,
+          historyBtn,
+        ],
+      ),
+    );
 
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.only(left: 10, right: 10, top: 40.0),
-        child: Column(children: [switcher]),
+        padding: EdgeInsets.only(left: 20, right: 20, top: 40.0),
+        child: Column(children: [controls]),
       ),
     );
   }
