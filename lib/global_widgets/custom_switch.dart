@@ -59,7 +59,7 @@ class _CustomSwitchState extends State<CustomSwitch>
             ),
             child: Padding(
               padding: const EdgeInsets.all(3.0),
-              child: Container(
+              child: AnimatedContainer(
                 alignment:
                     widget.value ? Alignment.centerRight : Alignment.centerLeft,
                 child: Container(
@@ -72,6 +72,7 @@ class _CustomSwitchState extends State<CustomSwitch>
                         : CustomColors.switcherLightColor,
                   ),
                 ),
+                duration: Duration(milliseconds: 150),
               ),
             ),
           ),
