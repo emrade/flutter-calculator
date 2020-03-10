@@ -15,11 +15,12 @@ ThemeData buildThemeData() {
 }
 
 ThemeData lightTheme = ThemeData(
-    brightness: Brightness.light,
-    primarySwatch: Colors.indigo,
-    accentColor: Colors.pink,
-    scaffoldBackgroundColor: Color(0xFFFEFDF9),
-    fontFamily: AppFonts.primaryFont);
+  brightness: Brightness.light,
+  primarySwatch: Colors.indigo,
+  accentColor: Colors.pink,
+  scaffoldBackgroundColor: Color(0xFFFEFDF9),
+  fontFamily: AppFonts.primaryFont,
+);
 
 ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
@@ -27,16 +28,22 @@ ThemeData darkTheme = ThemeData(
   accentColor: Colors.pink,
   scaffoldBackgroundColor: Color(0xFF555A60),
   fontFamily: AppFonts.primaryFont,
+  textTheme: TextTheme(
+    body1: TextStyle(color: CustomColors.primaryColor),
+    body2: TextStyle(color: CustomColors.primaryColor),
+    title: TextStyle(color: CustomColors.primaryColor),
+    display1: TextStyle(color: CustomColors.primaryColor),    
+  ),
 );
 
 class ThemeChanger with ChangeNotifier {
-  final String _key = "theme";
+  final String _key = "theme_preference";
   SharedPreferences _prefs;
   bool _isDarkTheme;
   bool get isDarkTheme => _isDarkTheme;
 
   ThemeChanger() {
-    _isDarkTheme = true;
+    _isDarkTheme = false;
     _loadTheme();
   }
 
@@ -52,7 +59,7 @@ class ThemeChanger with ChangeNotifier {
 
   _loadTheme() async {
     await _initPrefs();
-    _isDarkTheme = _prefs.getBool(_key) ?? true;
+    _isDarkTheme = _prefs.getBool(_key) ?? false;
     notifyListeners();
   }
 

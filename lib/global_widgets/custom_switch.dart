@@ -1,6 +1,5 @@
 import 'package:calculator/utils/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CustomSwitch extends StatefulWidget {
   final bool value;
@@ -44,8 +43,8 @@ class _CustomSwitchState extends State<CustomSwitch>
     final rightIcon = Positioned(
       child: Opacity(
         child: Icon(
-          FontAwesomeIcons.solidMoon,
-          size: 18.0,
+          Icons.brightness_3,
+          size: 20.0,
           color: CustomColors.switcherLightColor,
         ),
         opacity: widget.value ? 0 : 1,
