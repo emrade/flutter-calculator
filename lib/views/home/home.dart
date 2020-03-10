@@ -55,7 +55,6 @@ class HomePage extends StatelessWidget {
               fontSize: model.equationFontSize,
               color: CustomColors.primaryColor,
             ),
-            textDirection: TextDirection.rtl,
           ),
         ),
       ),

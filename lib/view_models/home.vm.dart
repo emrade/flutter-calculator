@@ -68,22 +68,16 @@ class HomeViewModel with ChangeNotifier {
       if (_equation != "0") {
         // _result = calcPercent(_equation);
 
-        _equation =  calcPercent(solve(_equation));
-        print("_equation");
-        print(_equation);
+        _equation = calcPercent(solve(_equation));
       }
-      // _result = calcPercent(_equation);
     } else if (buttonText == "=") {
       solveEquation();
     } else if (buttonText == ".") {
-      // print(_equation[_equation.length]);
-      //   if(_equation.substring(0, _equation.length - 1) == "."){
-      //     print("Already contains decimal");
-      //     return;
-      //   } else {
-      //     _equation = _equation + buttonText;
-      //   }
-      _equation = _equation + buttonText;
+      var lastChar = _equation.substring(_equation.length - 1);
+
+      if (lastChar != ".") {
+        _equation = _equation + buttonText;
+      }
     } else {
       if (_equation == "0") {
         _equation = buttonText;
@@ -111,9 +105,12 @@ class HomeViewModel with ChangeNotifier {
       Expression expression = parser.parse(_expression);
 
       ContextModel context = ContextModel();
-      String answerString = expression.evaluate(EvaluationType.REAL, context).toString();
+      String answerString =
+          expression.evaluate(EvaluationType.REAL, context).toString();
       double answer = double.parse(answerString);
-      _result = answerString.length >= 9 ? answer.toStringAsExponential(2) : answer.toString();
+      _result = answerString.length >= 9
+          ? answer.toStringAsExponential(2)
+          : answer.toString();
     } catch (e) {
       _result = "Error";
     }
@@ -122,7 +119,7 @@ class HomeViewModel with ChangeNotifier {
   }
 
   solve(String exp) {
-    var ex =  exp.replaceAll('x', '*');
+    var ex = exp.replaceAll('x', '*');
     String result = "";
     ex.replaceAll('÷', '/');
     try {
@@ -130,7 +127,8 @@ class HomeViewModel with ChangeNotifier {
       Expression expression = parser.parse(ex);
 
       ContextModel context = ContextModel();
-      String answerString = expression.evaluate(EvaluationType.REAL, context).toString();
+      String answerString =
+          expression.evaluate(EvaluationType.REAL, context).toString();
       double answer = double.parse(answerString);
       result = answer.toStringAsFixed(5);
     } catch (e) {
