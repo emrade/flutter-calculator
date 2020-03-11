@@ -26,10 +26,11 @@ class HomePage extends StatelessWidget {
       child: Text(
         "History",
         style: TextStyle(
-            fontSize: 18.0,
-            color: theme.isDarkTheme
-                ? CustomColors.primaryColor
-                : CustomColors.primaryDarkColor),
+          fontSize: 18.0,
+          color: theme.isDarkTheme
+              ? CustomColors.primaryColor
+              : CustomColors.primaryDarkColor,
+        ),
       ),
     );
 

@@ -76,7 +76,10 @@ class HomeViewModel with ChangeNotifier {
       var lastChar = _equation.substring(_equation.length - 1);
 
       if (lastChar != ".") {
-        _equation = _equation + buttonText;
+        var arr = _equation.replaceAll(new RegExp(r'[-+÷x]'), 'i').split('i');
+        if(!arr.last.contains(".")){
+           _equation += buttonText;
+        }
       }
     } else {
       if (_equation == "0") {
@@ -108,6 +111,7 @@ class HomeViewModel with ChangeNotifier {
       String answerString =
           expression.evaluate(EvaluationType.REAL, context).toString();
       double answer = double.parse(answerString);
+      // print(answer);
       _result = answerString.length >= 9
           ? answer.toStringAsExponential(2)
           : answer.toString();
