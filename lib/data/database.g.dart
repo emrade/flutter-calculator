@@ -137,8 +137,8 @@ class _$CalculationDao extends CalculationDao {
   }
 
   @override
-  Future<void> save(Calculation person) async {
+  Future<void> save(Calculation calculation) async {
     await _calculationInsertionAdapter.insert(
-        person, sqflite.ConflictAlgorithm.abort);
+        calculation, sqflite.ConflictAlgorithm.abort);
   }
 }

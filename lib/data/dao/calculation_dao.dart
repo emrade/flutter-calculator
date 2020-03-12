@@ -10,7 +10,7 @@ abstract class CalculationDao {
   Stream<List<Calculation>> indexStream();
 
   @insert
-  Future<void> save(Calculation person);
+  Future<void> save(Calculation calculation);
 
   @Query('DELETE FROM calculations')
   Future<void> clear();
