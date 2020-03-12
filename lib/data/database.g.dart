@@ -121,14 +121,17 @@ class _$CalculationDao extends CalculationDao {
 
   @override
   Future<List<Calculation>> index() async {
-    return _queryAdapter.queryList('SELECT * FROM calculations',
+    return _queryAdapter.queryList(
+        'SELECT * FROM calculations ORDER BY ID DESC',
         mapper: _calculationsMapper);
   }
 
   @override
   Stream<List<Calculation>> indexStream() {
-    return _queryAdapter.queryListStream('SELECT * FROM calculations',
-        tableName: 'calculations', mapper: _calculationsMapper);
+    return _queryAdapter.queryListStream(
+        'SELECT * FROM calculations ORDER BY ID DESC Limit 30',
+        tableName: 'calculations',
+        mapper: _calculationsMapper);
   }
 
   @override
