@@ -5,6 +5,7 @@ import 'package:calculator/view_models/home.vm.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../router.dart' as router;
 import '../../theme.dart';
 
 class HomePage extends StatelessWidget {
@@ -22,7 +23,7 @@ class HomePage extends StatelessWidget {
     );
 
     final historyBtn = GestureDetector(
-      onTap: () {},
+      onTap: () => Navigator.of(context).pushNamed(router.historyViewRoute),
       child: Text(
         "History",
         style: TextStyle(

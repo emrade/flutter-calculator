@@ -1,7 +1,19 @@
+import 'package:calculator/data/database.dart';
+import 'package:calculator/data/models/calculation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:math_expressions/math_expressions.dart';
 
 class HomeViewModel with ChangeNotifier {
+  var _database;
+  HomeViewModel() {
+    initDB();
+  }
+
+  void initDB() async {
+    _database =
+        await $FloorAppDatabase.databaseBuilder('app_database.db').build();
+  }
+
   List<String> _buttons = [
     'C',
     '⌫',
@@ -55,7 +67,15 @@ class HomeViewModel with ChangeNotifier {
     return false;
   }
 
+  bool isOperand(String val) {
+    if (val == '÷' || val == 'x' || val == '-' || val == '+') {
+      return true;
+    }
+    return false;
+  }
+
   void buttonPressed(String buttonText) {
+    var lastChar = _equation.substring(_equation.length - 1);
     if (buttonText == "C") {
       _equation = "0";
       _result = "0";
@@ -73,22 +93,23 @@ class HomeViewModel with ChangeNotifier {
     } else if (buttonText == "=") {
       solveEquation();
     } else if (buttonText == ".") {
-      var lastChar = _equation.substring(_equation.length - 1);
-
       if (lastChar != ".") {
         var arr = _equation.replaceAll(new RegExp(r'[-+÷x]'), 'i').split('i');
-        if(!arr.last.contains(".")){
-           _equation += buttonText;
+        if (!arr.last.contains(".")) {
+          _equation += buttonText;
         }
+      }
+    } else if (isOperand(buttonText)) {
+      if (!isOperand(lastChar)) {
+        _equation += buttonText;
       }
     } else {
       if (_equation == "0") {
         _equation = buttonText;
       } else {
-        _equation = _equation + buttonText;
+        _equation += buttonText;
       }
 
-      var lastChar = _equation.substring(_equation.length - 1);
       if (!isOperator2(lastChar)) {
         // solveEquation();
       }
@@ -115,6 +136,9 @@ class HomeViewModel with ChangeNotifier {
       _result = answerString.length >= 9
           ? answer.toStringAsExponential(2)
           : answer.toString();
+
+      // Save to history
+      saveCalc(_equation, _result);
     } catch (e) {
       _result = "Error";
     }
@@ -140,5 +164,19 @@ class HomeViewModel with ChangeNotifier {
       print(e);
     }
     return result;
+  }
+
+  Stream<List<Calculation>> getHistory() {
+    return _database.calculationDao.indexStream();
+  }
+
+  saveCalc(equation, result) async {
+    Calculation calc = new Calculation(equation, result);
+    await _database.calculationDao.save(calc);
+  }
+
+  clearHistory() async {
+    await _database.calculationDao.clear();
+    notifyListeners();
   }
 }

@@ -3,17 +3,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'utils/colors.dart';
 import 'utils/utils.dart';
 
-ThemeData buildThemeData() {
-  final baseTheme = ThemeData(fontFamily: AppFonts.primaryFont);
-
-  return baseTheme.copyWith(
-    primaryColor: CustomColors.primaryColor,
-    appBarTheme: AppBarTheme(
-      elevation: 0,
-    ),
-  );
-}
-
 ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
   primarySwatch: Colors.indigo,
@@ -28,13 +17,11 @@ ThemeData darkTheme = ThemeData(
   accentColor: Colors.pink,
   scaffoldBackgroundColor: Color(0xFF555A60),
   fontFamily: AppFonts.primaryFont,
-  textTheme: TextTheme(
-    body1: TextStyle(color: CustomColors.primaryColor),
-    body2: TextStyle(color: CustomColors.primaryColor),
-    title: TextStyle(color: CustomColors.primaryColor),
-    display1: TextStyle(color: CustomColors.primaryColor),    
-  ),
+  iconTheme: IconThemeData(
+    color: CustomColors.primaryColor
+  )
 );
+
 
 class ThemeChanger with ChangeNotifier {
   final String _key = "theme_preference";
@@ -43,7 +30,7 @@ class ThemeChanger with ChangeNotifier {
   bool get isDarkTheme => _isDarkTheme;
 
   ThemeChanger() {
-    _isDarkTheme = false;
+    _isDarkTheme = true;
     _loadTheme();
   }
 
@@ -59,7 +46,7 @@ class ThemeChanger with ChangeNotifier {
 
   _loadTheme() async {
     await _initPrefs();
-    _isDarkTheme = _prefs.getBool(_key) ?? false;
+    _isDarkTheme = _prefs.getBool(_key) ?? true;
     notifyListeners();
   }
 
