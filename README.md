@@ -21,7 +21,7 @@ Star this repo if you like what you see.
 **Emmanuel Fache**
 
 ## Download App
-<a href="https://github.com/emrade"><img src="screenshots/google-play-badge.png" width="50"></a>
+<a href="https://github.com/emrade"><img src="screenshots/google-play-badge.png" width="100"></a>
 
 ## Getting Started
 
