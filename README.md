@@ -9,9 +9,11 @@ Star this repo if you like what you see.
 
 <img src="screenshots/banner.png"/>
 
-<img src="screenshots/1.png" width="250"/> <img src="screenshots/11.png" width="250"/>
-
 <img src="screenshots/2.png" width="250"/> <img src="screenshots/22.png" width="250"/>
+
+<img src="screenshots/3.png" width="250"/> <img src="screenshots/33.png" width="250"/>
+
+<img src="screenshots/1.png" width="250"/> <img src="screenshots/11.png" width="250"/>
 
 
 
