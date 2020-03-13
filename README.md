@@ -1,6 +1,6 @@
 # Calculator
 
-A Flutter simple calculator built in flutter.
+A simple calculator built in flutter.
 
 
 Star this repo if you like what you see.
@@ -19,6 +19,9 @@ Star this repo if you like what you see.
 
 ## Author(s)
 **Emmanuel Fache**
+
+## Download App
+<a href="https://github.com/emrade"><img src="screenshots/google-play-badge.png" width="50"></a>
 
 ## Getting Started
 
